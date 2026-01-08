@@ -916,8 +916,8 @@
 
         setTheme(currentTheme);
         themeToggle.addEventListener('click', () => {
-            const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-            setTheme(theme);
+            const isDark = html.getAttribute('data-theme') === 'dark';
+            setTheme(isDark ? 'light' : 'dark');
         });
 
         // ===== Portfolio Filtering =====
