@@ -1,0 +1,1095 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Brian Eng - Frontend Engineer specializing in browser/DOM manipulation, testing automation, and interactive media solutions.">
+    <title>Brian Eng – Frontend Engineer</title>
+    <style>
+        /* ===== CSS Variables for Theming ===== */
+        :root {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f9fa;
+            --text-primary: #1a1a1a;
+            --text-secondary: #666666;
+            --text-tertiary: #999999;
+            --border-color: #e5e7eb;
+            --accent: #0073aa;
+            --accent-hover: #005a8a;
+            --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            --radius: 8px;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #0a0e27;
+            --bg-secondary: #1a1f3a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --text-tertiary: #808080;
+            --border-color: #2d3748;
+            --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        /* ===== Reset & Base Styles ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family);
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: var(--transition);
+            overflow-x: hidden;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover {
+            color: var(--accent-hover);
+        }
+
+        button {
+            font-family: inherit;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* ===== Container ===== */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== Header ===== */
+        header {
+            background-color: var(--bg-primary);
+            border-bottom: 1px solid var(--border-color);
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: var(--transition);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .site-branding {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .site-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: var(--radius);
+            background: linear-gradient(135deg, var(--accent), #0094d3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            color: white;
+            font-size: 20px;
+        }
+
+        .site-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav a {
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ===== Hero Section ===== */
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 3.5rem);
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--accent), #0094d3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .hero-description {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent), #0094d3);
+            color: white;
+            padding: 14px 32px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0, 115, 170, 0.3);
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 115, 170, 0.4);
+            color: white;
+        }
+
+        /* ===== Stats Section ===== */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+            padding: 40px;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== Portfolio Section ===== */
+        .portfolio-section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 50px;
+            text-align: center;
+            color: var(--text-primary);
+        }
+
+        .filter-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            background: transparent;
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .portfolio-item {
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            animation: fadeInUp 0.6s ease-out;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .portfolio-item.hidden {
+            display: none;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow-hover);
+        }
+
+        .portfolio-thumb {
+            position: relative;
+            overflow: hidden;
+            height: 240px;
+            background: var(--bg-secondary);
+        }
+
+        .portfolio-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .portfolio-item:hover .portfolio-thumb img {
+            transform: scale(1.05);
+        }
+
+        .portfolio-content {
+            padding: 24px;
+        }
+
+        .portfolio-cat {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .cat-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .portfolio-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .portfolio-item p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+
+        .view-btn {
+            display: inline-block;
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 6px 0;
+            border-bottom: 2px solid transparent;
+            transition: var(--transition);
+        }
+
+        .view-btn:hover {
+            border-bottom-color: var(--accent);
+        }
+
+        /* ===== Modal ===== */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--bg-primary);
+            border-radius: var(--radius);
+            max-width: 600px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: var(--bg-secondary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: var(--transition);
+            z-index: 1001;
+        }
+
+        .modal-close:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .modal-body {
+            padding: 40px;
+        }
+
+        .modal-body h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .modal-body .modal-cat {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .modal-body p {
+            color: var(--text-secondary);
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        /* ===== Theme Toggle ===== */
+        .theme-toggle {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0, 115, 170, 0.4);
+            z-index: 999;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 115, 170, 0.6);
+        }
+
+        /* ===== Footer ===== */
+        footer {
+            background: var(--bg-secondary);
+            color: var(--text-secondary);
+            padding: 40px 0;
+            margin-top: 60px;
+            border-top: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h4 {
+            color: var(--text-primary);
+            margin-bottom: 15px;
+            font-size: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+        }
+
+        /* ===== Animations ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        /* ===== Scroll Animations ===== */
+        .scroll-fade {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .scroll-fade.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            nav ul {
+                gap: 20px;
+            }
+
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 30px;
+            }
+
+            .modal-body {
+                padding: 24px;
+            }
+
+            .modal-image {
+                height: 250px;
+            }
+
+            .theme-toggle {
+                width: 48px;
+                height: 48px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            header {
+                padding: 15px 0;
+            }
+
+            .header-content {
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+
+            .site-title {
+                font-size: 1.2rem;
+            }
+
+            nav ul {
+                width: 100%;
+                gap: 15px;
+            }
+
+            .hero {
+                padding: 50px 0;
+            }
+
+            .filter-nav {
+                gap: 8px;
+            }
+
+            .filter-btn {
+                padding: 6px 12px;
+                font-size: 0.85rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin-bottom: 30px;
+            }
+
+            .portfolio-item p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* ===== Accessibility ===== */
+        focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        button:focus,
+        a:focus,
+        .filter-btn:focus,
+        .view-btn:focus {
+            outline: 2px solid var(--accent);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation-duration: 0.01ms !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body:not([data-theme]) {
+                --bg-primary: #0a0e27;
+                --bg-secondary: #1a1f3a;
+                --text-primary: #f0f0f0;
+                --text-secondary: #b0b0b0;
+                --text-tertiary: #808080;
+                --border-color: #2d3748;
+                --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+                --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="site-branding">
+                    <div class="site-logo">BE</div>
+                    <h1 class="site-title">Brian Eng</h1>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="mailto:brianeng87@gmail.com">Contact</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Frontend Engineer & DOM Wizard</h1>
+                <p class="hero-subtitle">Specializing in browser automation, testing, and interactive media solutions</p>
+                <p class="hero-description">
+                    I bring 4+ years of experience building robust frontend solutions in the eye-tracking and digital marketing space. From startup growth to acquisition, I've engineered interactive media systems that deliver measurable user insights.
+                </p>
+                <a href="mailto:brianeng87@gmail.com" class="cta-button">Get in Touch</a>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats scroll-fade">
+            <div class="stat-item">
+                <div class="stat-number">4+</div>
+                <div class="stat-label">Years Experience</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">6+</div>
+                <div class="stat-label">Major Projects</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">100%</div>
+                <div class="stat-label">Test Coverage</div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section class="portfolio-section" id="portfolio">
+            <div class="container">
+                <h2 class="section-title">Selected Works</h2>
+
+                <!-- Filter Navigation -->
+                <div class="filter-nav">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="dev">Development</button>
+                    <button class="filter-btn" data-filter="qa">QA & Testing</button>
+                    <button class="filter-btn" data-filter="scripting">Scripting</button>
+                </div>
+
+                <!-- Portfolio Grid -->
+                <div class="portfolio-grid">
+                    <!-- Automated Testing -->
+                    <article class="portfolio-item" data-category="qa">
+                        <div class="portfolio-thumb">
+                            <img src="https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/05/qa.png" alt="Automated Testing Framework">
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-cat">
+                                <span class="cat-badge">Development</span>
+                                <span class="cat-badge">QA</span>
+                            </div>
+                            <h3>Automated Testing Framework</h3>
+                            <p>Comprehensive Gherkin testing suite with Cucumber.js and Protractor for end-to-end browser automation.</p>
+                            <span class="view-btn">View Details →</span>
+                        </div>
+                    </article>
+
+                    <!-- Mobile Simulator -->
+                    <article class="portfolio-item" data-category="dev">
+                        <div class="portfolio-thumb">
+                            <img src="https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/05/mobo-sim-800x800.png" alt="Mobile Simulator">
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-cat">
+                                <span class="cat-badge">Development</span>
+                                <span class="cat-badge">Scripting</span>
+                            </div>
+                            <h3>Mobile Device Simulator</h3>
+                            <p>Interactive tool for simulating mobile device interactions and testing responsive layouts across viewports.</p>
+                            <span class="view-btn">View Details →</span>
+                        </div>
+                    </article>
+
+                    <!-- Password Overlay -->
+                    <article class="portfolio-item" data-category="scripting">
+                        <div class="portfolio-thumb">
+                            <img src="https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/05/passoverlay-800x800.png" alt="HTML Password Overlay">
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-cat">
+                                <span class="cat-badge">Development</span>
+                                <span class="cat-badge">Scripting</span>
+                            </div>
+                            <h3>HTML Overlay Password Lock</h3>
+                            <p>Secure password-protected overlay system for gating interactive media content on web pages.</p>
+                            <span class="view-btn">View Details →</span>
+                        </div>
+                    </article>
+
+                    <!-- Moving Image Script -->
+                    <article class="portfolio-item" data-category="scripting">
+                        <div class="portfolio-thumb">
+                            <img src="https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/12/movingshelf-800x800.png" alt="Moving Image Script">
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-cat">
+                                <span class="cat-badge">Development</span>
+                                <span class="cat-badge">Scripting</span>
+                            </div>
+                            <h3>Dynamic Image Animation</h3>
+                            <p>Smooth animation system for moving and transitioning image elements based on scroll or user interaction.</p>
+                            <span class="view-btn">View Details →</span>
+                        </div>
+                    </article>
+
+                    <!-- Randomized Shelf Set -->
+                    <article class="portfolio-item" data-category="dev">
+                        <div class="portfolio-thumb">
+                            <img src="https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/12/shelf-set-800x800.png" alt="Randomized Image Shelf Set">
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-cat">
+                                <span class="cat-badge">Development</span>
+                                <span class="cat-badge">Scripting</span>
+                            </div>
+                            <h3>Customizable Shelf Layout</h3>
+                            <p>Randomized image arrangement system with customizable parameters for dynamic content display.</p>
+                            <span class="view-btn">View Details →</span>
+                        </div>
+                    </article>
+
+                    <!-- JS Integration Scripts -->
+                    <article class="portfolio-item" data-category="scripting">
+                        <div class="portfolio-thumb">
+                            <img src="https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/05/js-inte.png" alt="JS Integration Scripts">
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-cat">
+                                <span class="cat-badge">Development</span>
+                                <span class="cat-badge">Scripting</span>
+                            </div>
+                            <h3>Platform Integration Scripts</h3>
+                            <p>Flexible JavaScript bindings for integrating third-party platforms and tracking gaze data collection systems.</p>
+                            <span class="view-btn">View Details →</span>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About</h4>
+                    <ul>
+                        <li><a href="mailto:brianeng87@gmail.com">Email</a></li>
+                        <li><a href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                        <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Skills</h4>
+                    <ul>
+                        <li>JavaScript / ES6+</li>
+                        <li>DOM Manipulation</li>
+                        <li>Browser Automation</li>
+                        <li>Cucumber / Protractor</li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Experience</h4>
+                    <ul>
+                        <li>Frontend Development</li>
+                        <li>QA Automation</li>
+                        <li>Interactive Media</li>
+                        <li>Eye-Tracking Tech</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Brian Eng. Designed and built with clean code and attention to detail.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Theme Toggle Button -->
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <span id="themeIcon">🌙</span>
+    </button>
+
+    <!-- Modal -->
+    <div class="modal" id="portfolioModal">
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+            <img src="" alt="" class="modal-image" id="modalImage">
+            <div class="modal-body">
+                <h2 id="modalTitle"></h2>
+                <div class="modal-cat" id="modalCat"></div>
+                <p id="modalDescription"></p>
+                <p id="modalDetails"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== Theme Toggle =====
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const html = document.documentElement;
+
+        // Check for saved theme preference or default to light
+        const currentTheme = localStorage.getItem('theme') || 
+                           (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+        function setTheme(theme) {
+            if (theme === 'dark') {
+                html.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                html.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        setTheme(currentTheme);
+        themeToggle.addEventListener('click', () => {
+            const theme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+            setTheme(theme);
+        });
+
+        // ===== Portfolio Filtering =====
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                // Filter items
+                const filter = btn.getAttribute('data-filter');
+                portfolioItems.forEach(item => {
+                    if (filter === 'all' || item.getAttribute('data-category') === filter) {
+                        item.classList.remove('hidden');
+                        setTimeout(() => item.style.opacity = '1', 10);
+                    } else {
+                        item.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // ===== Modal Functionality =====
+        const modal = document.getElementById('portfolioModal');
+        const modalClose = document.getElementById('modalClose');
+
+        const portfolioData = {
+            'Automated Testing Framework': {
+                image: 'https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/05/qa.png',
+                categories: ['Development', 'QA'],
+                description: 'Comprehensive Gherkin testing suite with Cucumber.js and Protractor for end-to-end browser automation.',
+                details: 'This framework streamlines the testing process for interactive media campaigns, enabling rapid validation of user interactions and data collection accuracy across multiple browsers and devices.'
+            },
+            'Mobile Device Simulator': {
+                image: 'https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/05/mobo-sim-800x800.png',
+                categories: ['Development', 'Scripting'],
+                description: 'Interactive tool for simulating mobile device interactions and testing responsive layouts across viewports.',
+                details: 'Built to test how interactive elements respond to touch events and viewport changes, ensuring consistent performance across all device sizes.'
+            },
+            'HTML Overlay Password Lock': {
+                image: 'https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/05/passoverlay-800x800.png',
+                categories: ['Development', 'Scripting'],
+                description: 'Secure password-protected overlay system for gating interactive media content on web pages.',
+                details: 'A flexible overlay system that protects sensitive interactive content while maintaining full DOM access and user tracking capabilities.'
+            },
+            'Dynamic Image Animation': {
+                image: 'https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/12/movingshelf-800x800.png',
+                categories: ['Development', 'Scripting'],
+                description: 'Smooth animation system for moving and transitioning image elements based on scroll or user interaction.',
+                details: 'Optimized animation library that provides smooth, performant transitions using CSS and JavaScript, tracking user engagement with animated content.'
+            },
+            'Customizable Shelf Layout': {
+                image: 'https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/12/shelf-set-800x800.png',
+                categories: ['Development', 'Scripting'],
+                description: 'Randomized image arrangement system with customizable parameters for dynamic content display.',
+                details: 'A flexible layout engine that randomizes product shelf displays while maintaining responsive design and collecting detailed interaction metrics.'
+            },
+            'Platform Integration Scripts': {
+                image: 'https://web.archive.org/web/20240517011359im_/https://www.brianinteractive.com/wp-content/uploads/2018/05/js-inte.png',
+                categories: ['Development', 'Scripting'],
+                description: 'Flexible JavaScript bindings for integrating third-party platforms and tracking gaze data collection systems.',
+                details: 'Provides seamless integration between web applications and gaze-tracking platforms, enabling real-time user attention analytics.'
+            }
+        };
+
+        portfolioItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const title = item.querySelector('h3').textContent;
+                const data = portfolioData[title];
+                
+                if (data) {
+                    document.getElementById('modalImage').src = data.image;
+                    document.getElementById('modalImage').alt = title;
+                    document.getElementById('modalTitle').textContent = title;
+                    document.getElementById('modalDescription').textContent = data.description;
+                    document.getElementById('modalDetails').textContent = data.details;
+                    
+                    const catHtml = data.categories.map(cat => `<span class="cat-badge">${cat}</span>`).join('');
+                    document.getElementById('modalCat').innerHTML = catHtml;
+                    
+                    modal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        modalClose.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // ===== Animated Counter =====
+        function animateCounter(element, target, duration = 2000) {
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target + (element.parentElement.querySelector('.stat-label').textContent.includes('Years') ? '+' : '%');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current) + (element.parentElement.querySelector('.stat-label').textContent.includes('+') ? '+' : '');
+                }
+            }, 16);
+        }
+
+        // Trigger counters on scroll
+        const stats = document.querySelector('.stats');
+        let hasAnimated = false;
+
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !hasAnimated) {
+                    hasAnimated = true;
+                    document.querySelectorAll('.stat-number').forEach((el, idx) => {
+                        const targets = [4, 6, 100];
+                        animateCounter(el, targets[idx]);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        if (stats) observer.observe(stats);
+
+        // ===== Scroll Fade Animation =====
+        const scrollFadeElements = document.querySelectorAll('.scroll-fade');
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        scrollFadeElements.forEach(el => scrollObserver.observe(el));
+
+        // ===== Smooth Scroll Navigation =====
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
