@@ -157,6 +157,50 @@
             width: 100%;
         }
 
+        /* ===== Tooltip ===== */
+        .contact-link {
+            position: relative;
+        }
+
+        .contact-link::before {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            margin-bottom: 8px;
+            z-index: 1000;
+        }
+
+        .contact-link::after {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: var(--text-primary);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            margin-bottom: -2px;
+            z-index: 1000;
+        }
+
+        .contact-link:hover::before,
+        .contact-link:hover::after {
+            opacity: 1;
+        }
+
         /* ===== Hero Section ===== */
         .hero {
             padding: 80px 0;
@@ -659,16 +703,6 @@
             }
         }
     </style>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-R64H05MLRT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-R64H05MLRT');
-</script>
-
 </head>
 <body>
 
@@ -683,7 +717,8 @@
                 <nav>
                     <ul>
                         <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="mailto:brianeng87@gmail.com">Contact</a></li>
+                        <li><a href="Brian Eng Resume.pdf" download>Resume</a></li>
+                        <li><a href="mailto:brianeng87@gmail.com" class="contact-link" data-tooltip="brianeng87@gmail.com">Contact</a></li>
                     </ul>
                 </nav>
             </div>
