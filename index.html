@@ -364,6 +364,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: top;
             transition: transform 0.5s ease;
         }
 
@@ -477,7 +478,8 @@
         .modal-image {
             width: 100%;
             height: 400px;
-            object-fit: cover;
+            object-fit: contain;
+            background: var(--bg-secondary);
         }
 
         .modal-body {
@@ -499,6 +501,26 @@
             color: var(--text-secondary);
             margin-bottom: 15px;
             line-height: 1.8;
+        }
+
+        .modal-link-btn {
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--accent);
+            font-weight: 600;
+            padding: 10px 20px;
+            border: 2px solid var(--accent);
+            border-radius: var(--radius);
+            transition: var(--transition);
+        }
+
+        .modal-link-btn:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .modal-link-btn.hidden {
+            display: none;
         }
 
         /* ===== Theme Toggle ===== */
@@ -726,6 +748,7 @@
                 <nav>
                     <ul>
                         <li><a href="#portfolio">Portfolio</a></li>
+                        <li><a href="https://github.com/brianeng00">Github</a></li>
                         <li><a href="Brian Eng Resume.pdf" download>Resume</a></li>
                         <li><a href="mailto:brianeng87@gmail.com" class="contact-link" data-tooltip="brianeng87@gmail.com">Contact</a></li>
                     </ul>
@@ -770,6 +793,36 @@
 
                 <!-- Portfolio Grid -->
                 <div class="portfolio-grid">
+                    <!-- React Chrome Extension -->
+                    <article class="portfolio-item" data-category="dev">
+                        <div class="portfolio-thumb">
+                            <img src="automator.png" alt="React Chrome Extension">
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-cat">
+                                <span class="cat-badge">Development</span>
+                            </div>
+                            <h3>React Chrome Extension</h3>
+                            <p>Internal dev tool for real-time live testing of embedded experiences on client sites. Cut integration testing time by 70%.</p>
+                            <span class="view-btn">View Details →</span>
+                        </div>
+                    </article>
+
+                    <!-- EmberJS Category Styling Feature -->
+                    <article class="portfolio-item" data-category="dev">
+                        <div class="portfolio-thumb">
+                            <img src="shelf-set-800x800.png" alt="EmberJS Category Styling Feature">
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-cat">
+                                <span class="cat-badge">Development</span>
+                            </div>
+                            <h3>EmberJS Category Styling Feature</h3>
+                            <p>Internal platform feature that gave designers category-wide styling control across creative assets. Eliminated a 10-20 minute manual workaround.</p>
+                            <span class="view-btn">View Details →</span>
+                        </div>
+                    </article>
+
                     <!-- Automated Testing -->
                     <article class="portfolio-item" data-category="qa">
                         <div class="portfolio-thumb">
@@ -924,6 +977,7 @@
                 <div class="modal-cat" id="modalCat"></div>
                 <p id="modalDescription"></p>
                 <p id="modalDetails"></p>
+                <a id="modalLink" class="modal-link-btn hidden" href="" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
             </div>
         </div>
     </div>
@@ -984,6 +1038,19 @@
         const modalClose = document.getElementById('modalClose');
 
         const portfolioData = {
+            'React Chrome Extension': {
+                image: 'autom.gif',
+                categories: ['Development'],
+                description: 'Internal dev tool that enabled real-time live testing of embedded experiences on client sites, built because teammates were blocked by slow manual integration testing.',
+                details: 'Built with React, TypeScript, and a custom Webpack multi-entry config to handle the Chrome extension build pipeline: popup, content script, and background service worker compiled as separate bundles. Uses the Chrome Extension API and CSS injection via DOM manipulation to inject and configure experiences live on any client site. Reduced integration testing time by 70%.',
+                link: 'https://github.com/brianeng00/top-bar-automator'
+            },
+            'EmberJS Category Styling Feature': {
+                image: 'shelf-set-800x800.png',
+                categories: ['Development'],
+                description: 'Internal platform feature that gave designers category-wide styling control across creative assets, built from scratch with zero documentation to go on.',
+                details: 'Dug into the data models to understand how styling layers were structured, then built cascade logic that applied bulk updates without overwriting one-off customizations designers had already made. What previously took 10 to 20 minutes of repetitive work now takes seconds. 80% efficiency gain. Presented to the design lead and managers at completion.'
+            },
             'Automated Testing Framework': {
                 image: 'qa.png',
                 categories: ['Development', 'QA'],
@@ -1033,10 +1100,19 @@
                     document.getElementById('modalTitle').textContent = title;
                     document.getElementById('modalDescription').textContent = data.description;
                     document.getElementById('modalDetails').textContent = data.details;
-                    
+
                     const catHtml = data.categories.map(cat => `<span class="cat-badge">${cat}</span>`).join('');
                     document.getElementById('modalCat').innerHTML = catHtml;
-                    
+
+                    const modalLink = document.getElementById('modalLink');
+                    if (data.link) {
+                        modalLink.href = data.link;
+                        modalLink.classList.remove('hidden');
+                    } else {
+                        modalLink.href = '';
+                        modalLink.classList.add('hidden');
+                    }
+
                     modal.classList.add('active');
                     document.body.style.overflow = 'hidden';
                 }
