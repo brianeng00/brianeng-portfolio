@@ -714,7 +714,7 @@
         }
 
         /* ===== Accessibility ===== */
-        focus {
+        :focus {
             outline: 2px solid var(--accent);
             outline-offset: 2px;
         }
@@ -722,9 +722,22 @@
         button:focus,
         a:focus,
         .filter-btn:focus,
+        .portfolio-item:focus,
         .view-btn:focus {
             outline: 2px solid var(--accent);
             outline-offset: 2px;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -771,7 +784,7 @@
         </section>
 
         <!-- Stats Section -->
-        <section class="stats scroll-fade">
+        <section class="stats scroll-fade" aria-label="Career highlights">
             <div class="stat-item">
                 <div class="stat-number">11+</div>
                 <div class="stat-label">Years Crafting Frontend Solutions</div>
@@ -784,17 +797,17 @@
                 <h2 class="section-title">Selected Works</h2>
 
                 <!-- Filter Navigation -->
-                <div class="filter-nav">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="dev">Development</button>
-                    <button class="filter-btn" data-filter="qa">QA & Testing</button>
-                    <button class="filter-btn" data-filter="scripting">Scripting</button>
-                </div>
+                <nav class="filter-nav" aria-label="Portfolio filter">
+                    <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
+                    <button class="filter-btn" data-filter="dev" aria-pressed="false">Development</button>
+                    <button class="filter-btn" data-filter="qa" aria-pressed="false">QA & Testing</button>
+                    <button class="filter-btn" data-filter="scripting" aria-pressed="false">Scripting</button>
+                </nav>
 
                 <!-- Portfolio Grid -->
                 <div class="portfolio-grid">
                     <!-- React Chrome Extension -->
-                    <article class="portfolio-item" data-category="dev">
+                    <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="automator.png" alt="React Chrome Extension">
                         </div>
@@ -804,12 +817,12 @@
                             </div>
                             <h3>React Chrome Extension</h3>
                             <p>Internal dev tool for real-time live testing of embedded experiences on client sites. Cut integration testing time by 70%.</p>
-                            <span class="view-btn">View Details →</span>
+                            <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
 
                     <!-- EmberJS Category Styling Feature -->
-                    <article class="portfolio-item" data-category="dev">
+                    <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="ember.png" alt="EmberJS Category Styling Feature">
                         </div>
@@ -819,12 +832,12 @@
                             </div>
                             <h3>EmberJS Category Styling Feature</h3>
                             <p>Internal platform feature that gave designers category-wide styling control across creative assets. Eliminated a 10-20 minute manual workaround.</p>
-                            <span class="view-btn">View Details →</span>
+                            <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
 
                     <!-- Automated Testing -->
-                    <article class="portfolio-item" data-category="qa">
+                    <article class="portfolio-item" data-category="qa" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="qa.png" alt="Automated Testing Framework">
                         </div>
@@ -835,12 +848,12 @@
                             </div>
                             <h3>Automated Testing Framework</h3>
                             <p>Comprehensive Gherkin testing suite with Cucumber.js and Protractor for end-to-end browser automation.</p>
-                            <span class="view-btn">View Details →</span>
+                            <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
 
                     <!-- Mobile Simulator -->
-                    <article class="portfolio-item" data-category="dev">
+                    <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="mobo-sim-800x800.png" alt="Mobile Simulator">
                         </div>
@@ -851,12 +864,12 @@
                             </div>
                             <h3>Mobile Device Simulator</h3>
                             <p>Interactive tool for simulating mobile device interactions and testing responsive layouts across viewports.</p>
-                            <span class="view-btn">View Details →</span>
+                            <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
 
                     <!-- Password Overlay -->
-                    <article class="portfolio-item" data-category="scripting">
+                    <article class="portfolio-item" data-category="scripting" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="passoverlay-800x800.png" alt="HTML Password Overlay">
                         </div>
@@ -867,12 +880,12 @@
                             </div>
                             <h3>HTML Overlay Password Lock</h3>
                             <p>Secure password-protected overlay system for gating interactive media content on web pages.</p>
-                            <span class="view-btn">View Details →</span>
+                            <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
 
                     <!-- Moving Image Script -->
-                    <article class="portfolio-item" data-category="scripting">
+                    <article class="portfolio-item" data-category="scripting" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="movingshelf-800x800.png" alt="Moving Image Script">
                         </div>
@@ -883,12 +896,12 @@
                             </div>
                             <h3>Dynamic Image Animation</h3>
                             <p>Smooth animation system for moving and transitioning image elements based on scroll or user interaction.</p>
-                            <span class="view-btn">View Details →</span>
+                            <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
 
                     <!-- Randomized Shelf Set -->
-                    <article class="portfolio-item" data-category="dev">
+                    <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="shelf-set-800x800.png" alt="Randomized Image Shelf Set">
                         </div>
@@ -899,12 +912,12 @@
                             </div>
                             <h3>Customizable Shelf Layout</h3>
                             <p>Randomized image arrangement system with customizable parameters for dynamic content display.</p>
-                            <span class="view-btn">View Details →</span>
+                            <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
 
                     <!-- JS Integration Scripts -->
-                    <article class="portfolio-item" data-category="scripting">
+                    <article class="portfolio-item" data-category="scripting" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="js-inte.png" alt="JS Integration Scripts">
                         </div>
@@ -915,7 +928,7 @@
                             </div>
                             <h3>Platform Integration Scripts</h3>
                             <p>Defensive JavaScript integrations for embedding third-party scripts inside live client production pages. Built to run reliably in unpredictable environments we had no control over, under performance constraints we couldn't negotiate.</p>
-                            <span class="view-btn">View Details →</span>
+                            <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
                 </div>
@@ -930,9 +943,9 @@
                 <div class="footer-section contact">
                     <h4>Contact</h4>
                     <ul>
-                        <li><span class="material-icons">email</span><a href="mailto:brianeng87@gmail.com">brianeng87@gmail.com</a></li>
-                        <li><span class="material-icons">code</span><a href="https://github.com/brianeng00" target="_blank" rel="noopener noreferrer">GitHub</a></li>
-                        <li><span class="material-icons">people</span><a href="https://linkedin.com/in/brianeng00" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                        <li><span class="material-icons" aria-hidden="true">email</span><a href="mailto:brianeng87@gmail.com">brianeng87@gmail.com</a></li>
+                        <li><span class="material-icons" aria-hidden="true">code</span><a href="https://github.com/brianeng00" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                        <li><span class="material-icons" aria-hidden="true">people</span><a href="https://linkedin.com/in/brianeng00" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
@@ -969,12 +982,12 @@
     </button>
 
     <!-- Modal -->
-    <div class="modal" id="portfolioModal">
+    <div class="modal" id="portfolioModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
             <img src="" alt="" class="modal-image" id="modalImage">
             <div class="modal-body">
-                <h2 id="modalTitle"></h2>
+                <h2 id="modalTitle" tabindex="-1"></h2>
                 <div class="modal-cat" id="modalCat"></div>
                 <p id="modalDescription"></p>
                 <p id="modalDetails"></p>
@@ -1017,9 +1030,13 @@
 
         filterBtns.forEach(btn => {
             btn.addEventListener('click', () => {
-                // Update active button
-                filterBtns.forEach(b => b.classList.remove('active'));
+                // Update active button and aria-pressed
+                filterBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
 
                 // Filter items
                 const filter = btn.getAttribute('data-filter');
@@ -1037,6 +1054,7 @@
         // ===== Modal Functionality =====
         const modal = document.getElementById('portfolioModal');
         const modalClose = document.getElementById('modalClose');
+        let lastFocusedCard = null;
 
         const portfolioData = {
             'React Chrome Extension': {
@@ -1090,54 +1108,64 @@
             }
         };
 
+        function openModal(item) {
+            const title = item.querySelector('h3').textContent;
+            const data = portfolioData[title];
+
+            if (data) {
+                document.getElementById('modalImage').src = data.image;
+                document.getElementById('modalImage').alt = title;
+                document.getElementById('modalTitle').textContent = title;
+                document.getElementById('modalDescription').textContent = data.description;
+                document.getElementById('modalDetails').textContent = data.details;
+
+                const catHtml = data.categories.map(cat => `<span class="cat-badge">${cat}</span>`).join('');
+                document.getElementById('modalCat').innerHTML = catHtml;
+
+                const modalLink = document.getElementById('modalLink');
+                if (data.link) {
+                    modalLink.href = data.link;
+                    modalLink.classList.remove('hidden');
+                } else {
+                    modalLink.href = '';
+                    modalLink.classList.add('hidden');
+                }
+
+                lastFocusedCard = item;
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                document.getElementById('modalTitle').focus();
+            }
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            if (lastFocusedCard) {
+                lastFocusedCard.focus();
+                lastFocusedCard = null;
+            }
+        }
+
         portfolioItems.forEach(item => {
-            item.addEventListener('click', () => {
-                const title = item.querySelector('h3').textContent;
-                const data = portfolioData[title];
-                
-                if (data) {
-                    document.getElementById('modalImage').src = data.image;
-                    document.getElementById('modalImage').alt = title;
-                    document.getElementById('modalTitle').textContent = title;
-                    document.getElementById('modalDescription').textContent = data.description;
-                    document.getElementById('modalDetails').textContent = data.details;
-
-                    const catHtml = data.categories.map(cat => `<span class="cat-badge">${cat}</span>`).join('');
-                    document.getElementById('modalCat').innerHTML = catHtml;
-
-                    const modalLink = document.getElementById('modalLink');
-                    if (data.link) {
-                        modalLink.href = data.link;
-                        modalLink.classList.remove('hidden');
-                    } else {
-                        modalLink.href = '';
-                        modalLink.classList.add('hidden');
-                    }
-
-                    modal.classList.add('active');
-                    document.body.style.overflow = 'hidden';
+            item.addEventListener('click', () => openModal(item));
+            item.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    openModal(item);
                 }
             });
         });
 
-        modalClose.addEventListener('click', () => {
-            modal.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        });
+        modalClose.addEventListener('click', closeModal);
 
         modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
+            if (e.target === modal) closeModal();
         });
 
         // Close modal with Escape key
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) {
-                modal.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            }
+            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
         });
 
         // ===== Animated Counter =====
