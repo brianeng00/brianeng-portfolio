@@ -806,6 +806,21 @@
 
                 <!-- Portfolio Grid -->
                 <div class="portfolio-grid">
+                    <!-- FlightTrack -->
+                    <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
+                        <div class="portfolio-thumb">
+                            <img src="flighttrack.png" alt="FlightTrack real-time flight tracker plotting live aircraft on a map">
+                        </div>
+                        <div class="portfolio-content">
+                            <div class="portfolio-cat">
+                                <span class="cat-badge">Development</span>
+                            </div>
+                            <h3>FlightTrack</h3>
+                            <p>Real-time flight tracker in React 19 and TypeScript. Plots live aircraft on a WebGL map and interpolates positions between polls so motion reads as continuous.</p>
+                            <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
+                        </div>
+                    </article>
+
                     <!-- React Chrome Extension -->
                     <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
                         <div class="portfolio-thumb">
@@ -1057,6 +1072,13 @@
         let lastFocusedCard = null;
 
         const portfolioData = {
+            'FlightTrack': {
+                image: 'flighttrack.png',
+                categories: ['Development'],
+                description: 'Real-time flight tracker that plots live aircraft on a WebGL map, built around a data source that updates far more slowly than the interface needs to.',
+                details: 'React 19, TypeScript, Vite and MapLibre GL JS. The OpenSky API polls on a 60 second cycle, so aircraft would sit frozen and then jump. Dead-reckoning interpolation runs at 10fps between polls using the spherical law of cosines, so motion reads as continuous, and an early poll fires when a projected position drifts too far from the last known waypoint. Defensive throughout: geolocation degrades from GPS to IP to a default, rate limits back off with a visible countdown, polling pauses via the Page Visibility API, and the map degrades gracefully when WebGL is unavailable. Tested with Vitest, React Testing Library and Playwright.',
+                link: 'https://github.com/brianeng00/flight-track'
+            },
             'React Chrome Extension': {
                 image: 'autom.gif',
                 categories: ['Development'],
