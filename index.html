@@ -284,6 +284,49 @@
         }
 
         /* ===== Portfolio Section ===== */
+        /* ===== Current Work ===== */
+        .now-section {
+            padding: 80px 0 0;
+        }
+
+        .now-intro {
+            max-width: 700px;
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+            margin: -30px 0 50px;
+        }
+
+        .now-item {
+            padding: 32px 0;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .now-item:last-child {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .now-item h3 {
+            font-size: 1.25rem;
+            margin-bottom: 14px;
+            color: var(--text-primary);
+        }
+
+        .now-item p {
+            max-width: 68ch;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .now-item p + p {
+            margin-top: 14px;
+        }
+
+        .now-caveat {
+            color: var(--text-tertiary);
+            font-size: 0.95rem;
+        }
+
         .portfolio-section {
             padding: 80px 0;
         }
@@ -761,7 +804,7 @@
                 <nav>
                     <ul>
                         <li><a href="#portfolio">Portfolio</a></li>
-                        <li><a href="https://github.com/brianeng00">Github</a></li>
+                        <li><a href="https://github.com/brianeng00">GitHub</a></li>
                         <li><a href="BrianEngResume.pdf" download>Resume</a></li>
                         <li><a href="mailto:brianeng87@gmail.com" class="contact-link" data-tooltip="brianeng87@gmail.com">Contact</a></li>
                     </ul>
@@ -788,6 +831,63 @@
             <div class="stat-item">
                 <div class="stat-number">11+</div>
                 <div class="stat-label">Years in the browser layer</div>
+            </div>
+        </section>
+
+        <!-- Current Work -->
+        <section class="now-section" id="now">
+            <div class="container">
+                <h2 class="section-title">Since December 2025</h2>
+                <p class="now-intro">
+                    Independent since Wunderkind ended, building while I look for a platform and DX role.
+                    Both of the first two are running, not prototypes &mdash; one of them on a tablet in my
+                    kitchen, the other on my own job search.
+                </p>
+
+                <div class="now-item">
+                    <h3>career-ops</h3>
+                    <p>
+                        An agentic pipeline that scans, scores and tracks roles against a framework I defined:
+                        comp floor, stack fit, geography, interview-loop signal, narrative alignment. The scanner
+                        stage hits ATS REST APIs directly before any model call, so cost stays proportional to
+                        signal rather than to volume. 100+ roles evaluated, 126 structured reports generated.
+                    </p>
+                    <p>I use it on myself.</p>
+                </div>
+
+                <div class="now-item">
+                    <h3>TabletHub</h3>
+                    <p class="now-caveat">
+                        Kotlin and Swift are personal-project languages for me, not professional experience.
+                        What this was for was the debugging.
+                    </p>
+                    <p>
+                        A native ambient display, built twice: an Android DreamService in Kotlin and Jetpack
+                        Compose, then a persistent iPadOS app in Swift and SwiftUI, same feature set on both.
+                        3,250 lines across 26 files, four REST APIs, on-device ML for subject detection
+                        &mdash; MediaPipe on Android, Vision on iOS. 11,500 photos in live rotation on a
+                        physical tablet.
+                    </p>
+                    <p>
+                        The iOS build deadlocked. Synchronous Vision work inside Swift task-group children was
+                        starving the cooperative thread pool, and it was invisible in the Simulator, where Vision
+                        throws immediately instead of doing the work. I found it by writing breadcrumbs to
+                        UserDefaults and pulling them off the device with devicectl. Moving the work to a
+                        dedicated queue behind a checked continuation cleared it: 10,822 photos scanned in about
+                        five minutes, no deadlocks.
+                    </p>
+                </div>
+
+                <div class="now-item">
+                    <h3>Multi-agent development workflow</h3>
+                    <p>
+                        A daily-use setup where Google&rsquo;s Antigravity IDE delegates discrete implementation
+                        tasks to Claude Code, across two vendor ecosystems. Every unit of output gets reviewed and
+                        corrected before it ships. The operating rule is the one I carried out of six years
+                        debugging embedded JavaScript in environments I did not control: never accept output I
+                        cannot explain.
+                    </p>
+                </div>
             </div>
         </section>
 
