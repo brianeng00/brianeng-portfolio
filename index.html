@@ -809,7 +809,7 @@
                     <!-- FlightTrack -->
                     <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
                         <div class="portfolio-thumb">
-                            <img src="flighttrack.png" alt="FlightTrack real-time flight tracker plotting live aircraft on a map">
+                            <img src="flighttrack.webp" alt="FlightTrack real-time flight tracker plotting live aircraft on a map" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
@@ -824,7 +824,7 @@
                     <!-- React Chrome Extension -->
                     <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
                         <div class="portfolio-thumb">
-                            <img src="automator.png" alt="React Chrome Extension">
+                            <img src="automator.webp" alt="React Chrome Extension" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
@@ -839,7 +839,7 @@
                     <!-- EmberJS Category Styling Feature -->
                     <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
                         <div class="portfolio-thumb">
-                            <img src="ember.png" alt="EmberJS Category Styling Feature">
+                            <img src="ember.webp" alt="EmberJS Category Styling Feature" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
@@ -854,7 +854,7 @@
                     <!-- Automated Testing -->
                     <article class="portfolio-item" data-category="qa" tabindex="0" role="button">
                         <div class="portfolio-thumb">
-                            <img src="qa.png" alt="Automated Testing Framework">
+                            <img src="qa.webp" alt="Automated Testing Framework" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
@@ -870,7 +870,7 @@
                     <!-- Mobile Simulator -->
                     <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
                         <div class="portfolio-thumb">
-                            <img src="mobo-sim-800x800.png" alt="Mobile Simulator">
+                            <img src="mobo-sim-800x800.webp" alt="Mobile Simulator" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
@@ -886,7 +886,7 @@
                     <!-- Password Overlay -->
                     <article class="portfolio-item" data-category="scripting" tabindex="0" role="button">
                         <div class="portfolio-thumb">
-                            <img src="passoverlay-800x800.png" alt="HTML Password Overlay">
+                            <img src="passoverlay-800x800.webp" alt="HTML Password Overlay" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
@@ -902,7 +902,7 @@
                     <!-- Moving Image Script -->
                     <article class="portfolio-item" data-category="scripting" tabindex="0" role="button">
                         <div class="portfolio-thumb">
-                            <img src="movingshelf-800x800.png" alt="Moving Image Script">
+                            <img src="movingshelf-800x800.webp" alt="Moving Image Script" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
@@ -918,7 +918,7 @@
                     <!-- Randomized Shelf Set -->
                     <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
                         <div class="portfolio-thumb">
-                            <img src="shelf-set-800x800.png" alt="Randomized Image Shelf Set">
+                            <img src="shelf-set-800x800.webp" alt="Randomized Image Shelf Set" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
@@ -934,7 +934,7 @@
                     <!-- JS Integration Scripts -->
                     <article class="portfolio-item" data-category="scripting" tabindex="0" role="button">
                         <div class="portfolio-thumb">
-                            <img src="js-inte.png" alt="JS Integration Scripts">
+                            <img src="js-inte.webp" alt="JS Integration Scripts" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
@@ -1073,7 +1073,7 @@
 
         const portfolioData = {
             'FlightTrack': {
-                image: 'flighttrack.png',
+                image: 'flighttrack.webp',
                 categories: ['Development'],
                 description: 'Real-time flight tracker that plots live aircraft on a WebGL map, built around a data source that updates far more slowly than the interface needs to.',
                 details: 'React 19, TypeScript, Vite and MapLibre GL JS. The OpenSky API polls on a 60 second cycle, so aircraft would sit frozen and then jump. Dead-reckoning interpolation runs at 10fps between polls using the spherical law of cosines, so motion reads as continuous, and an early poll fires when a projected position drifts too far from the last known waypoint. Defensive throughout: geolocation degrades from GPS to IP to a default, rate limits back off with a visible countdown, polling pauses via the Page Visibility API, and the map degrades gracefully when WebGL is unavailable. Tested with Vitest, React Testing Library and Playwright.',
@@ -1087,43 +1087,43 @@
                 link: 'https://github.com/brianeng00/top-bar-automator'
             },
             'EmberJS Category Styling Feature': {
-                image: 'shelf-set-800x800.png',
+                image: 'shelf-set-800x800.webp',
                 categories: ['Development'],
                 description: 'Internal platform feature that gave designers category-wide styling control across creative assets, built from scratch with zero documentation to go on.',
                 details: 'Dug into the data models to understand how styling layers were structured, then built cascade logic that applied bulk updates without overwriting one-off customizations designers had already made. What previously took 10 to 20 minutes of repetitive work now takes seconds. 80% efficiency gain. Presented to the design lead and managers at completion.'
             },
             'Automated Testing Framework': {
-                image: 'qa.png',
+                image: 'qa.webp',
                 categories: ['Development', 'QA'],
                 description: 'Comprehensive Gherkin testing suite with Cucumber.js and Protractor for end-to-end browser automation.',
                 details: 'This framework streamlines the testing process for interactive media campaigns, enabling rapid validation of user interactions and data collection accuracy across multiple browsers and devices.'
             },
             'Mobile Device Simulator': {
-                image: 'mobo-sim-800x800.png',
+                image: 'mobo-sim-800x800.webp',
                 categories: ['Development', 'Scripting'],
                 description: 'Interactive tool for simulating mobile device interactions and testing responsive layouts across viewports.',
                 details: 'Built to test how interactive elements respond to touch events and viewport changes, ensuring consistent performance across all device sizes.'
             },
             'HTML Overlay Password Lock': {
-                image: 'passoverlay-800x800.png',
+                image: 'passoverlay-800x800.webp',
                 categories: ['Development', 'Scripting'],
                 description: 'Secure password-protected overlay system for gating interactive media content on web pages.',
                 details: 'A flexible overlay system that protects sensitive interactive content while maintaining full DOM access and user tracking capabilities.'
             },
             'Dynamic Image Animation': {
-                image: 'movingshelf-800x800.png',
+                image: 'movingshelf-800x800.webp',
                 categories: ['Development', 'Scripting'],
                 description: 'Smooth animation system for moving and transitioning image elements based on scroll or user interaction.',
                 details: 'Optimized animation library that provides smooth, performant transitions using CSS and JavaScript, tracking user engagement with animated content.'
             },
             'Customizable Shelf Layout': {
-                image: 'shelf-set-800x800.png',
+                image: 'shelf-set-800x800.webp',
                 categories: ['Development', 'Scripting'],
                 description: 'Randomized image arrangement system with customizable parameters for dynamic content display.',
                 details: 'A flexible layout engine that randomizes product shelf displays while maintaining responsive design and collecting detailed interaction metrics.'
             },
             'Platform Integration Scripts': {
-                image: 'js-inte.png',
+                image: 'js-inte.webp',
                 categories: ['Development', 'Scripting'],
                 description: 'Defensive JavaScript integrations for embedding third-party scripts inside live client production pages. Built to run reliably in unpredictable environments we had no control over, under performance constraints we couldn\'t negotiate.',
                 details: 'Written to run inside unpredictable production environments: client sites with conflicting scripts, CSP restrictions, and zero tolerance for degradation. Handles cross-origin isolation, event delegation, and safe DOM access patterns that don\'t break the host page.'
