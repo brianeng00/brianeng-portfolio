@@ -21,6 +21,12 @@
             --border-color: #e5e7eb;
             --accent: #0073aa;
             --accent-hover: #005a8a;
+            /* The accent as TEXT needs more contrast than the accent as a
+               background. #0073aa is only 4.49:1 on #eeeeee and 3.10:1 on the
+               dark card, so links get their own pair, darker in light and
+               lighter in dark. --accent stays for fills, borders and outlines. */
+            --accent-text: #005a8a;
+            --accent-text-hover: #004666;
             --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
             --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.12);
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -35,6 +41,8 @@
             --text-secondary: #b0b0b0;
             --text-tertiary: #808080;
             --border-color: #2d3748;
+            --accent-text: #0094d3;
+            --accent-text-hover: #29bbff;
             --card-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
             --card-shadow-hover: 0 8px 24px rgba(0, 0, 0, 0.4);
         }
@@ -60,13 +68,13 @@
         }
 
         a {
-            color: var(--accent);
+            color: var(--accent-text);
             text-decoration: none;
             transition: var(--transition);
         }
 
         a:hover {
-            color: var(--accent-hover);
+            color: var(--accent-text-hover);
         }
 
         button {
@@ -273,7 +281,7 @@
         .stat-number {
             font-size: 2.5rem;
             font-weight: 700;
-            color: var(--accent);
+            color: var(--accent-text);
             margin-bottom: 8px;
         }
 
@@ -358,8 +366,8 @@
         }
 
         .filter-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
+            border-color: var(--accent-text);
+            color: var(--accent-text);
         }
 
         .filter-btn.active {
@@ -508,7 +516,7 @@
 
         .view-btn {
             display: inline-block;
-            color: var(--accent);
+            color: var(--accent-text);
             font-weight: 600;
             font-size: 0.9rem;
             padding: 6px 0;
@@ -517,7 +525,7 @@
         }
 
         .view-btn:hover {
-            border-bottom-color: var(--accent);
+            border-bottom-color: var(--accent-text);
         }
 
         /* ===== Modal ===== */
@@ -613,10 +621,10 @@
         .modal-link-btn {
             display: inline-block;
             margin-top: 10px;
-            color: var(--accent);
+            color: var(--accent-text);
             font-weight: 600;
             padding: 10px 20px;
-            border: 2px solid var(--accent);
+            border: 2px solid var(--accent-text);
             border-radius: var(--radius);
             transition: var(--transition);
         }
@@ -821,8 +829,11 @@
         }
 
         /* ===== Accessibility ===== */
+        /* The ring lands on a card as often as on the page, and --accent is
+           only 3.10:1 against the dark card -- technically a pass, with
+           nothing to spare on the ten things a keyboard lands on. */
         :focus {
-            outline: 2px solid var(--accent);
+            outline: 2px solid var(--accent-text);
             outline-offset: 2px;
         }
 
@@ -831,7 +842,7 @@
         .filter-btn:focus,
         .portfolio-item:focus,
         .view-btn:focus {
-            outline: 2px solid var(--accent);
+            outline: 2px solid var(--accent-text);
             outline-offset: 2px;
         }
 
