@@ -1000,7 +1000,8 @@
     <div class="modal" id="portfolioModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
-            <img src="" alt="" class="modal-image" id="modalImage">
+            <img alt="" class="modal-image" id="modalImage" hidden>
+            <video class="modal-image" id="modalVideo" muted loop playsinline preload="none" hidden></video>
             <div class="modal-body">
                 <h2 id="modalTitle" tabindex="-1"></h2>
                 <div class="modal-cat" id="modalCat"></div>
@@ -1080,7 +1081,7 @@
                 link: 'https://github.com/brianeng00/flight-track'
             },
             'React Chrome Extension': {
-                image: 'autom.gif',
+                image: 'autom.mp4',
                 categories: ['Development'],
                 description: 'Internal dev tool that enabled real-time live testing of embedded experiences on client sites, built because teammates were blocked by slow manual integration testing.',
                 details: 'Built with React, TypeScript, and a custom Webpack multi-entry config to handle the Chrome extension build pipeline: popup, content script, and background service worker compiled as separate bundles. Uses the Chrome Extension API and CSS injection via DOM manipulation to inject and configure experiences live on any client site. Reduced integration testing time by 70%.',
@@ -1130,13 +1131,38 @@
             }
         };
 
+        // Project media is an image or, for screen recordings, a muted looping video.
+        function setModalMedia(src, title) {
+            const img = document.getElementById('modalImage');
+            const vid = document.getElementById('modalVideo');
+            const isVideo = /\.(mp4|webm)$/i.test(src);
+            img.hidden = isVideo;
+            vid.hidden = !isVideo;
+            if (isVideo) {
+                img.removeAttribute('src');
+                vid.src = src;
+                vid.setAttribute('aria-label', title);
+                // The GIF this replaced could never be stopped. Honour the preference now that it can.
+                if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                    vid.controls = true;
+                } else {
+                    vid.controls = false;
+                    vid.play().catch(() => { vid.controls = true; });
+                }
+            } else {
+                vid.pause();
+                vid.removeAttribute('src');
+                img.src = src;
+                img.alt = title;
+            }
+        }
+
         function openModal(item) {
             const title = item.querySelector('h3').textContent;
             const data = portfolioData[title];
 
             if (data) {
-                document.getElementById('modalImage').src = data.image;
-                document.getElementById('modalImage').alt = title;
+                setModalMedia(data.image, title);
                 document.getElementById('modalTitle').textContent = title;
                 document.getElementById('modalDescription').textContent = data.description;
                 document.getElementById('modalDetails').textContent = data.details;
@@ -1161,6 +1187,8 @@
         }
 
         function closeModal() {
+            const v = document.getElementById('modalVideo');
+            v.pause();
             modal.classList.remove('active');
             document.body.style.overflow = 'auto';
             if (lastFocusedCard) {
