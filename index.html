@@ -862,7 +862,7 @@
                                 <span class="cat-badge">QA</span>
                             </div>
                             <h3>Automated Testing Framework</h3>
-                            <p>Comprehensive Gherkin testing suite with Cucumber.js and Protractor for end-to-end browser automation.</p>
+                            <p>Gherkin suite in Cucumber.js and Protractor, validating interactive media across browsers and devices before it went into research sessions.</p>
                             <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
@@ -878,7 +878,7 @@
                                 <span class="cat-badge">Scripting</span>
                             </div>
                             <h3>Mobile Device Simulator</h3>
-                            <p>Interactive tool for simulating mobile device interactions and testing responsive layouts across viewports.</p>
+                            <p>Mobile and tablet simulator that ran live eye-tracking off the device&rsquo;s own camera, in any browser window, with no dedicated eye-tracker attached.</p>
                             <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
@@ -894,7 +894,7 @@
                                 <span class="cat-badge">Scripting</span>
                             </div>
                             <h3>HTML Overlay Password Lock</h3>
-                            <p>Secure password-protected overlay system for gating interactive media content on web pages.</p>
+                            <p>Password gate for client assets that were not meant to be publicly reachable &mdash; and it had to sit over the page without breaking the capture running underneath.</p>
                             <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
@@ -910,7 +910,7 @@
                                 <span class="cat-badge">Scripting</span>
                             </div>
                             <h3>Dynamic Image Animation</h3>
-                            <p>Smooth animation system for moving and transitioning image elements based on scroll or user interaction.</p>
+                            <p>Scroll- and interaction-driven motion for images inside study stimuli, with engagement recorded alongside the capture data.</p>
                             <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
@@ -926,7 +926,7 @@
                                 <span class="cat-badge">Scripting</span>
                             </div>
                             <h3>Customizable Shelf Layout</h3>
-                            <p>Randomized image arrangement system with customizable parameters for dynamic content display.</p>
+                            <p>Randomized retail shelf layouts for product studies, so position did not ride along with the result.</p>
                             <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
@@ -1096,38 +1096,38 @@
             'Automated Testing Framework': {
                 image: 'qa.webp',
                 categories: ['Development', 'QA'],
-                description: 'Comprehensive Gherkin testing suite with Cucumber.js and Protractor for end-to-end browser automation.',
-                details: 'This framework streamlines the testing process for interactive media campaigns, enabling rapid validation of user interactions and data collection accuracy across multiple browsers and devices.'
+                description: 'Gherkin suite in Cucumber.js and Protractor, validating interactive media across browsers and devices before it went into research sessions.',
+                details: 'What was under test was not a checkout flow. These were interactive ads and media assets going into eye-tracking and facial-coding sessions, so the thing that mattered was whether an interaction and the data it produced both survived the browser. A silent failure did not look like a bug. It looked like data. Gherkin specs in Cucumber.js driving Protractor, so a scenario read as the behavior being validated rather than as a script.'
             },
             'Mobile Device Simulator': {
                 image: 'mobo-sim-800x800.webp',
                 categories: ['Development', 'Scripting'],
-                description: 'Interactive tool for simulating mobile device interactions and testing responsive layouts across viewports.',
-                details: 'Built to test how interactive elements respond to touch events and viewport changes, ensuring consistent performance across all device sizes.'
+                description: 'Mobile and tablet simulator that ran live eye-tracking off the device\u2019s own camera, in any browser window, with no dedicated eye-tracker attached.',
+                details: 'The platform normally needed dedicated eye-tracking hardware. This let a study run on a phone or tablet using the device\u2019s own camera, inside an ordinary browser window, with the simulator reproducing the target viewport and touch behavior around it. Built on the reusable AngularJS templates we had standardized for the platform, so one capture flow covered every form factor instead of being rebuilt per device.'
             },
             'HTML Overlay Password Lock': {
                 image: 'passoverlay-800x800.webp',
                 categories: ['Development', 'Scripting'],
-                description: 'Secure password-protected overlay system for gating interactive media content on web pages.',
-                details: 'A flexible overlay system that protects sensitive interactive content while maintaining full DOM access and user tracking capabilities.'
+                description: 'Password gate for client assets that were not meant to be publicly reachable, sitting over the page without breaking the capture running underneath.',
+                details: 'Clients sent assets that were not meant to be publicly reachable, so a session needed a lock in front of them. The gate was the easy part. The constraint was that everything behind it still had to work: the DOM stayed fully reachable and interaction capture kept running, which ruled out an iframe or a separate page. Plain JavaScript and jQuery layered over the live document.'
             },
             'Dynamic Image Animation': {
                 image: 'movingshelf-800x800.webp',
                 categories: ['Development', 'Scripting'],
-                description: 'Smooth animation system for moving and transitioning image elements based on scroll or user interaction.',
-                details: 'Optimized animation library that provides smooth, performant transitions using CSS and JavaScript, tracking user engagement with animated content.'
+                description: 'Scroll- and interaction-driven motion for images inside study stimuli, with engagement recorded alongside the capture data.',
+                details: 'CSS transforms where the browser could handle them, JavaScript where it could not. This was the jQuery era and the support matrix was wide. Moved and transitioned image elements in response to scroll and interaction, and recorded engagement with the animated content, so the motion was part of what the study measured rather than decoration on top of it.'
             },
             'Customizable Shelf Layout': {
                 image: 'shelf-set-800x800.webp',
                 categories: ['Development', 'Scripting'],
-                description: 'Randomized image arrangement system with customizable parameters for dynamic content display.',
-                details: 'A flexible layout engine that randomizes product shelf displays while maintaining responsive design and collecting detailed interaction metrics.'
+                description: 'Randomized retail shelf layouts for product studies, so position did not ride along with the result.',
+                details: 'A shelf set is a grid of products a participant looks at while being tracked. Show every participant the same arrangement and position is confounded with product. This built shelves from a configurable product set, randomized the arrangement per session, kept the layout responsive so one study ran across screen sizes, and recorded interaction against each position.'
             },
             'Platform Integration Scripts': {
                 image: 'js-inte.webp',
                 categories: ['Development', 'Scripting'],
                 description: 'Defensive JavaScript integrations for embedding third-party scripts inside live client production pages. Built to run reliably in unpredictable environments we had no control over, under performance constraints we couldn’t negotiate.',
-                details: 'Written to run inside unpredictable production environments: client sites with conflicting scripts, CSP restrictions, and zero tolerance for degradation. Handles cross-origin isolation, event delegation, and safe DOM access patterns that don’t break the host page.'
+                details: 'Studies ran inside third-party survey tools \u2014 SurveyGizmo, Qualtrics, ConfirmIt \u2014 so the capture layer had to live in someone else\u2019s page: conflicting scripts, CSP restrictions, and markup that could change between one study and the next with no notice. Cross-origin isolation, event delegation, and DOM access patterns that do not break the host. Data moved out through Python and Node REST integrations into Podio, Salesforce and Google Analytics.'
             }
         };
 
