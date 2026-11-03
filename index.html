@@ -961,7 +961,7 @@
                                 <span class="cat-badge">QA</span>
                             </div>
                             <h3>Automated Testing Framework</h3>
-                            <p>Gherkin suite in Cucumber.js and Protractor, validating interactive media across browsers and devices before it went into research sessions.</p>
+                            <p>Gherkin suite in Cucumber.js and Protractor over Selenium, run across BrowserStack from Jenkins, validating interactive media before it went into research sessions.</p>
                             <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
@@ -1195,8 +1195,8 @@
             'Automated Testing Framework': {
                 image: 'qa.webp',
                 categories: ['Development', 'QA'],
-                description: 'Gherkin suite in Cucumber.js and Protractor, validating interactive media across browsers and devices before it went into research sessions.',
-                details: 'What was under test was not a checkout flow. These were interactive ads and media assets going into eye-tracking and facial-coding sessions, so the thing that mattered was whether an interaction and the data it produced both survived the browser. A silent failure did not look like a bug. It looked like data. Gherkin specs in Cucumber.js driving Protractor, so a scenario read as the behavior being validated rather than as a script.'
+                description: 'Gherkin suite in Cucumber.js and Protractor over Selenium, run across BrowserStack from Jenkins, validating interactive media before it went into research sessions.',
+                details: 'What was under test was not a checkout flow. These were interactive ads and media assets going into eye-tracking and facial-coding sessions, so the thing that mattered was whether an interaction and the data it produced both survived the browser. A silent failure did not look like a bug. It looked like data. Gherkin specs in Cucumber.js driving Protractor over Selenium WebDriver, run across the BrowserStack device grid from Jenkins on AWS. The scenarios read as the behavior being validated rather than as scripts, and the browser matrix ran in CI instead of by hand.'
             },
             'Mobile Device Simulator': {
                 image: 'mobo-sim-800x800.webp',
