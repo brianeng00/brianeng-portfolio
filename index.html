@@ -719,6 +719,155 @@
             display: none;
         }
 
+        /* ===== Expand to view =====
+           Every raster image on this page is stored two to four times larger
+           than the box it renders in, so expanding one costs no extra bytes:
+           the lightbox shows the exact file the thumbnail already fetched. */
+        .zoom {
+            display: block;
+            position: relative;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: none;
+            cursor: zoom-in;
+        }
+
+        /* `display: block` above outranks the UA rule for [hidden], the same
+           trap the modal image hit, so the hidden state needs saying twice. */
+        .zoom[hidden] {
+            display: none;
+        }
+
+        .now-media .zoom {
+            border-radius: var(--radius);
+        }
+
+        .zoom::after {
+            content: "Expand";
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.72);
+            color: #fff;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            opacity: 0;
+            transition: var(--transition);
+            pointer-events: none;
+        }
+
+        .zoom:hover::after,
+        .zoom:focus-visible::after {
+            opacity: 1;
+        }
+
+        /* A touch screen has no hover to reveal it, so the cue stays put. */
+        @media (hover: none) {
+            .zoom::after {
+                opacity: 1;
+            }
+        }
+
+        .zoom--modal::after {
+            bottom: 14px;
+            right: 14px;
+        }
+
+        /* ===== Lightbox ===== */
+        .lightbox {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1100;
+            background: rgba(0, 0, 0, 0.92);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 64px 20px 28px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox-stage {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 0;
+            /* An explicit width, not max-width: the SVG below sizes itself in
+               percentages, and a shrink-to-fit stage would be sizing itself
+               from the SVG at the same time. The diagram then never grows
+               past its own viewBox. */
+            width: 100%;
+        }
+
+        .lightbox-media {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: calc(100vh - 170px);
+            max-height: calc(100dvh - 170px);
+            border-radius: var(--radius);
+        }
+
+        /* The workflow diagram is inline SVG with no pixel size of its own, so
+           it needs a width to grow into. A screenshot must not be stretched
+           past the pixels it actually has, which is why only the SVG gets one. */
+        svg.lightbox-media {
+            width: min(760px, 100%);
+            box-sizing: border-box;
+            padding: 24px;
+            background: var(--bg-primary);
+        }
+
+        /* The backdrop is near-black in both themes, so this one piece of text
+           does not take a theme token: --text-secondary would go invisible on
+           it the moment the page is in light mode. */
+        .lightbox-caption {
+            max-width: 68ch;
+            margin: 0;
+            color: #e8e8e8;
+            font-size: 0.9rem;
+            line-height: 1.65;
+            text-align: center;
+        }
+
+        .lightbox-caption:empty {
+            display: none;
+        }
+
+        .lightbox-close {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.16);
+            color: #fff;
+            font-size: 26px;
+            line-height: 1;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover {
+            background: var(--accent);
+        }
+
         /* ===== Theme Toggle ===== */
         .theme-toggle {
             position: fixed;
@@ -1021,7 +1170,9 @@
                         <a href="https://github.com/brianeng00/flight-track" target="_blank" rel="noopener noreferrer">Source on GitHub &rarr;</a>
                     </p>
                     <figure class="now-media">
-                        <img src="flighttrack.webp" alt="FlightTrack plotting live aircraft over a dark WebGL map" loading="lazy" decoding="async" width="1200" height="750">
+                        <button type="button" class="zoom" aria-label="Expand the FlightTrack screenshot">
+                            <img src="flighttrack.webp" alt="FlightTrack plotting live aircraft over a dark WebGL map" loading="lazy" decoding="async" width="1200" height="750">
+                        </button>
                         <figcaption>Positions are interpolated between polls, so aircraft glide instead of jumping once a minute.</figcaption>
                     </figure>
                 </div>
@@ -1049,7 +1200,9 @@
                         deadlocks.
                     </p>
                     <figure class="now-media">
-                        <img src="tablethub.webp" alt="The TabletHub ambient display: a large clock and date over a photo from the rotation, with air quality, a near-term forecast and a six-day forecast" loading="lazy" decoding="async" width="800" height="556">
+                        <button type="button" class="zoom" aria-label="Expand the TabletHub screenshot">
+                            <img src="tablethub.webp" alt="The TabletHub ambient display: a large clock and date over a photo from the rotation, with air quality, a near-term forecast and a six-day forecast" loading="lazy" decoding="async" width="800" height="556">
+                        </button>
                         <figcaption>The iPadOS build. Clock, air quality, near-term and six-day forecast over a photo from the rotation.</figcaption>
                     </figure>
                 </div>
@@ -1073,6 +1226,7 @@
                     </p>
                     <p>I use it on myself.</p>
                     <div class="now-media">
+                        <button type="button" class="zoom" aria-label="Expand the workflow diagram">
                         <svg viewBox="0 0 300 250" role="img" aria-label="Diagram: Antigravity delegates a task to Claude Code, the output passes a review gate, and career-ops is what the loop produced">
                             <rect class="wf-box" x="1" y="1" width="298" height="46" rx="8"/>
                             <text class="wf-t" x="16" y="22">Antigravity</text>
@@ -1093,6 +1247,7 @@
                             <text class="wf-t" x="16" y="222">career-ops</text>
                             <text class="wf-s" x="16" y="239">100+ roles, 126 reports</text>
                         </svg>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1325,11 +1480,20 @@
         <span id="themeIcon">🌙</span>
     </button>
 
+    <!-- Lightbox: one overlay for every image on the page -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Expanded image">
+        <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Close expanded image">&times;</button>
+        <div class="lightbox-stage" id="lightboxStage"></div>
+        <p class="lightbox-caption" id="lightboxCap"></p>
+    </div>
+
     <!-- Modal -->
     <div class="modal" id="portfolioModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-content">
             <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
-            <img alt="" class="modal-image" id="modalImage" hidden>
+            <button type="button" class="zoom zoom--modal" id="modalImageZoom" hidden>
+                <img alt="" class="modal-image" id="modalImage">
+            </button>
             <video class="modal-image" id="modalVideo" muted loop playsinline preload="none" hidden></video>
             <div class="modal-body">
                 <h2 id="modalTitle" tabindex="-1"></h2>
@@ -1461,19 +1625,23 @@
         // Project media is an image or, for screen recordings, a muted looping video.
         function setModalMedia(src, title) {
             const img = document.getElementById('modalImage');
+            const zoom = document.getElementById('modalImageZoom');
             const vid = document.getElementById('modalVideo');
+            zoom.setAttribute('aria-label', 'Expand the ' + title + ' screenshot');
             // Not every project is a screen. A library has nothing to photograph,
             // so its modal opens on the text instead of on a broken image.
             if (!src) {
                 vid.pause();
                 vid.removeAttribute('src');
                 img.removeAttribute('src');
-                img.hidden = true;
+                zoom.hidden = true;
                 vid.hidden = true;
                 return;
             }
             const isVideo = /\.(mp4|webm)$/i.test(src);
-            img.hidden = isVideo;
+            // The image is wrapped in its expand button now, so the wrapper is
+            // what hides; a screen recording has its own controls and stays flat.
+            zoom.hidden = isVideo;
             vid.hidden = !isVideo;
             if (isVideo) {
                 img.removeAttribute('src');
@@ -1550,9 +1718,85 @@
             if (e.target === modal) closeModal();
         });
 
-        // Close modal with Escape key
+        // ===== Expand to view =====
+        // One overlay serves every image on the page: the two artifacts under
+        // "Since December 2025", the workflow diagram, and the screenshot inside
+        // a project modal. Each file is already bigger than the box it renders
+        // in, so expanding it is a repaint, not another request.
+        const lightbox = document.getElementById('lightbox');
+        const lightboxStage = document.getElementById('lightboxStage');
+        const lightboxCap = document.getElementById('lightboxCap');
+        const lightboxClose = document.getElementById('lightboxClose');
+        let lightboxOpener = null;
+
+        function openLightbox(btn) {
+            const source = btn.querySelector('img, svg');
+            if (!source) return;
+
+            // A clone, so the thumbnail keeps its own size and lazy-loading
+            // attributes while the copy is free to fill the viewport.
+            const copy = source.cloneNode(true);
+            ['class', 'width', 'height', 'loading'].forEach(a => copy.removeAttribute(a));
+            copy.setAttribute('class', 'lightbox-media');
+            lightboxStage.replaceChildren(copy);
+
+            const fig = btn.closest('figure');
+            const cap = fig && fig.querySelector('figcaption');
+            lightboxCap.textContent = cap
+                ? cap.textContent.trim()
+                : (source.getAttribute('alt') || source.getAttribute('aria-label') || '');
+
+            lightboxOpener = btn;
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            lightboxClose.focus();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            lightboxStage.replaceChildren();
+            // A lightbox opened from inside a project modal has to leave the page
+            // locked behind it. Only the last overlay to close releases the scroll.
+            document.body.style.overflow = modal.classList.contains('active') ? 'hidden' : 'auto';
+            if (lightboxOpener) {
+                lightboxOpener.focus();
+                lightboxOpener = null;
+            }
+        }
+
+        // Delegated, so the button inside the modal is wired by the same line
+        // as the ones in the page: the modal's image changes on every open.
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest && e.target.closest('.zoom');
+            if (btn) openLightbox(btn);
+        });
+
+        lightboxClose.addEventListener('click', closeLightbox);
+
+        // The image and its caption stay put when clicked. Only the surround closes,
+        // so clicking in to look at a detail does not dismiss what you came to see.
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target === lightboxStage) closeLightbox();
+        });
+
+        // Nothing behind the lightbox is reachable while it is open, so Tab holds
+        // on its one control instead of wandering into the page underneath.
+        lightbox.addEventListener('keydown', (e) => {
+            if (e.key === 'Tab') {
+                e.preventDefault();
+                lightboxClose.focus();
+            }
+        });
+
+        // Escape closes the topmost overlay only: a lightbox opened from inside a
+        // project modal must not take the modal down with it.
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+            if (e.key !== 'Escape') return;
+            if (lightbox.classList.contains('active')) {
+                closeLightbox();
+                return;
+            }
+            if (modal.classList.contains('active')) closeModal();
         });
 
         // ===== Animated Counter =====
