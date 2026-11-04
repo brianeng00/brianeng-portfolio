@@ -309,6 +309,86 @@
             border-top: 1px solid var(--border-color);
         }
 
+        /* The text measure is capped at 68ch, so on a wide screen every item
+           already leaves a third of the row empty. The artifact goes there,
+           beside the writing, rather than on top of it as a banner. Below
+           900px it falls under the text and the rhythm is unchanged. */
+        .now-media {
+            margin-top: 22px;
+            max-width: 480px;
+        }
+
+        .now-media img,
+        .now-media svg {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius);
+        }
+
+        .now-media img {
+            border: 1px solid var(--border-color);
+        }
+
+        .now-media figcaption {
+            margin-top: 10px;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.55;
+        }
+
+        @media (min-width: 900px) {
+            .now-item--media {
+                display: grid;
+                grid-template-columns: minmax(0, 1fr) 300px;
+                column-gap: 48px;
+                align-items: start;
+            }
+
+            .now-item--media > :not(.now-media) {
+                grid-column: 1;
+            }
+
+            .now-media {
+                grid-column: 2;
+                /* No explicit rows exist, so `1 / -1` resolves to row 1 alone and
+                   stretches it to the image height, leaving a hole under the h3. */
+                grid-row: 1 / span 99;
+                margin-top: 6px;
+                max-width: none;
+            }
+        }
+
+        .wf-box {
+            fill: var(--bg-secondary);
+        }
+
+        .wf-gate {
+            fill: none;
+            stroke: var(--accent);
+            stroke-width: 2;
+        }
+
+        .wf-arrow {
+            fill: none;
+            stroke: var(--text-secondary);
+            stroke-width: 1.5;
+        }
+
+        .wf-head {
+            fill: var(--text-secondary);
+        }
+
+        .wf-t {
+            fill: var(--text-primary);
+            font: 600 14px var(--font-family);
+        }
+
+        .wf-s {
+            fill: var(--text-secondary);
+            font: 400 12px var(--font-family);
+        }
+
         .now-item:last-child {
             border-bottom: 1px solid var(--border-color);
         }
@@ -329,8 +409,9 @@
             margin-top: 14px;
         }
 
+        /* No color here on purpose: `.now-item p` outranks this selector, so a
+           color would be dead CSS -- and --text-tertiary is 2.85:1 on white. */
         .now-caveat {
-            color: var(--text-tertiary);
             font-size: 0.95rem;
         }
 
@@ -914,54 +995,105 @@
             <div class="container">
                 <h2 class="section-title">Since December 2025</h2>
                 <p class="now-intro">
-                    Independent since Wunderkind ended, building while I look for a platform and DX role.
-                    Both of the first two are running, not prototypes &mdash; one of them on a tablet in my
-                    kitchen, the other on my own job search.
+                    Independent since Wunderkind ended, building while I look for a platform and DX
+                    role. Not prototypes &mdash; one of these runs on a tablet in my kitchen, one
+                    runs on my own job search.
                 </p>
 
-                <div class="now-item">
-                    <h3>career-ops</h3>
+                <div class="now-item now-item--media">
+                    <h3>FlightTrack</h3>
                     <p>
-                        An agentic pipeline that scans, scores and tracks roles against a framework I defined:
-                        comp floor, stack fit, geography, interview-loop signal, narrative alignment. The scanner
-                        stage hits ATS REST APIs directly before any model call, so cost stays proportional to
-                        signal rather than to volume. 100+ roles evaluated, 126 structured reports generated.
+                        A real-time flight tracker built around a data source that updates far more
+                        slowly than the interface needs to. React 19, TypeScript, Vite and MapLibre
+                        GL JS over WebGL. The OpenSky API polls on a 60 second cycle, so aircraft sat
+                        frozen and then jumped; dead-reckoning interpolation now runs at 10fps
+                        between polls, and an early poll fires when a projected position drifts too
+                        far from the last known waypoint.
                     </p>
-                    <p>I use it on myself.</p>
+                    <p>
+                        Defensive throughout, the way six years of embedded work taught me to be:
+                        geolocation degrades from GPS to IP to a default, rate limits back off behind
+                        a visible countdown, polling pauses on the Page Visibility API, and the map
+                        has a state for WebGL being unavailable. Vitest and React Testing Library for
+                        units, Playwright for the flows.
+                    </p>
+                    <p>
+                        <a href="https://github.com/brianeng00/flight-track" target="_blank" rel="noopener noreferrer">Source on GitHub &rarr;</a>
+                    </p>
+                    <figure class="now-media">
+                        <img src="flighttrack.webp" alt="FlightTrack plotting live aircraft over a dark WebGL map" loading="lazy" decoding="async" width="1200" height="750">
+                        <figcaption>Positions are interpolated between polls, so aircraft glide instead of jumping once a minute.</figcaption>
+                    </figure>
                 </div>
 
-                <div class="now-item">
+                <div class="now-item now-item--media">
                     <h3>TabletHub</h3>
                     <p class="now-caveat">
-                        Kotlin and Swift are personal-project languages for me, not professional experience.
-                        What this was for was the debugging.
+                        Kotlin and Swift are personal-project languages for me, not professional
+                        experience. What this was for was the debugging.
                     </p>
                     <p>
-                        A native ambient display, built twice: an Android DreamService in Kotlin and Jetpack
-                        Compose, then a persistent iPadOS app in Swift and SwiftUI, same feature set on both.
-                        3,250 lines across 26 files, four REST APIs, on-device ML for subject detection
-                        &mdash; MediaPipe on Android, Vision on iOS. 11,500 photos in live rotation on a
-                        physical tablet.
+                        A native ambient display, built twice: an Android DreamService in Kotlin and
+                        Jetpack Compose, then a persistent iPadOS app in Swift and SwiftUI, same
+                        feature set on both. 3,250 lines across 26 files, four REST APIs, on-device
+                        ML for subject detection &mdash; MediaPipe on Android, Vision on iOS. 11,500
+                        photos in live rotation on a physical tablet.
                     </p>
                     <p>
-                        The iOS build deadlocked. Synchronous Vision work inside Swift task-group children was
-                        starving the cooperative thread pool, and it was invisible in the Simulator, where Vision
-                        throws immediately instead of doing the work. I found it by writing breadcrumbs to
-                        UserDefaults and pulling them off the device with devicectl. Moving the work to a
-                        dedicated queue behind a checked continuation cleared it: 10,822 photos scanned in about
-                        five minutes, no deadlocks.
+                        The iOS build deadlocked. Synchronous Vision work inside Swift task-group
+                        children was starving the cooperative thread pool, and it was invisible in
+                        the Simulator, where Vision throws immediately instead of doing the work. I
+                        found it by writing breadcrumbs to UserDefaults and pulling them off the
+                        device with devicectl. Moving the work to a dedicated queue behind a checked
+                        continuation cleared it: 10,822 photos scanned in about five minutes, no
+                        deadlocks.
                     </p>
+                    <figure class="now-media">
+                        <img src="tablethub.webp" alt="The TabletHub ambient display: a large clock and date over a photo from the rotation, with air quality, a near-term forecast and a six-day forecast" loading="lazy" decoding="async" width="800" height="556">
+                        <figcaption>The iPadOS build. Clock, air quality, near-term and six-day forecast over a photo from the rotation.</figcaption>
+                    </figure>
                 </div>
 
-                <div class="now-item">
+                <div class="now-item now-item--media">
                     <h3>Multi-agent development workflow</h3>
                     <p>
-                        A daily-use setup where Google&rsquo;s Antigravity IDE delegates discrete implementation
-                        tasks to Claude Code, across two vendor ecosystems. Every unit of output gets reviewed and
-                        corrected before it ships. The operating rule is the one I carried out of six years
-                        debugging embedded JavaScript in environments I did not control: never accept output I
-                        cannot explain.
+                        A daily-use setup where Google&rsquo;s Antigravity IDE delegates discrete
+                        implementation tasks to Claude Code, across two vendor ecosystems. Every unit
+                        of output gets reviewed and corrected before it ships. The operating rule is
+                        the one I carried out of six years debugging embedded JavaScript in
+                        environments I did not control: never accept output I cannot explain.
                     </p>
+                    <p>
+                        career-ops is what came out of it &mdash; an agentic pipeline that scans,
+                        scores and tracks roles against a framework I defined: comp floor, stack fit,
+                        geography, interview-loop signal, narrative alignment. The scanner stage hits
+                        ATS REST APIs directly before any model call, so cost stays proportional to
+                        signal rather than to volume. 100+ roles evaluated, 126 structured reports
+                        generated.
+                    </p>
+                    <p>I use it on myself.</p>
+                    <div class="now-media">
+                        <svg viewBox="0 0 300 250" role="img" aria-label="Diagram: Antigravity delegates a task to Claude Code, the output passes a review gate, and career-ops is what the loop produced">
+                            <rect class="wf-box" x="1" y="1" width="298" height="46" rx="8"/>
+                            <text class="wf-t" x="16" y="22">Antigravity</text>
+                            <text class="wf-s" x="16" y="38">Gemini Pro &mdash; delegates the task</text>
+                            <path class="wf-arrow" d="M150 47 L150 59"/>
+                            <path class="wf-head" d="M145 59 L150 65 L155 59 Z"/>
+                            <rect class="wf-box" x="1" y="65" width="298" height="46" rx="8"/>
+                            <text class="wf-t" x="16" y="86">Claude Code</text>
+                            <text class="wf-s" x="16" y="102">implements one discrete task</text>
+                            <path class="wf-arrow" d="M150 111 L150 123"/>
+                            <path class="wf-head" d="M145 123 L150 129 L155 123 Z"/>
+                            <rect class="wf-gate" x="2" y="130" width="296" height="50" rx="8"/>
+                            <text class="wf-t" x="16" y="152">Review</text>
+                            <text class="wf-s" x="16" y="169">never ship what I cannot explain</text>
+                            <path class="wf-arrow" d="M150 181 L150 193"/>
+                            <path class="wf-head" d="M145 193 L150 199 L155 193 Z"/>
+                            <rect class="wf-box" x="1" y="199" width="298" height="50" rx="8"/>
+                            <text class="wf-t" x="16" y="222">career-ops</text>
+                            <text class="wf-s" x="16" y="239">100+ roles, 126 reports</text>
+                        </svg>
+                    </div>
                 </div>
             </div>
         </section>
