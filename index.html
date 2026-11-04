@@ -1106,15 +1106,15 @@
                 <!-- Filter Navigation -->
                 <nav class="filter-nav" aria-label="Portfolio filter">
                     <button class="filter-btn active" data-filter="all" aria-pressed="true">All</button>
-                    <button class="filter-btn" data-filter="dev" aria-pressed="false">Development</button>
-                    <button class="filter-btn" data-filter="qa" aria-pressed="false">QA & Testing</button>
-                    <button class="filter-btn" data-filter="scripting" aria-pressed="false">Scripting</button>
+                    <button class="filter-btn" data-filter="platform" aria-pressed="false">Platform</button>
+                    <button class="filter-btn" data-filter="tooling" aria-pressed="false">Tooling</button>
+                    <button class="filter-btn" data-filter="interfaces" aria-pressed="false">Interfaces</button>
                 </nav>
 
                 <!-- Portfolio Grid -->
                 <div class="portfolio-grid">
                     <!-- Shared Integration Library -->
-                    <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
+                    <article class="portfolio-item" data-category="platform" tabindex="0" role="button">
                         <div class="portfolio-thumb portfolio-thumb--diagram">
                             <svg viewBox="0 0 480 270" role="img" aria-label="Diagram: one shared library of patterns, standards and edge cases, feeding four separate client pages">
                                 <rect class="dg-src" x="19.5" y="40" width="185" height="190" rx="10"/>
@@ -1154,7 +1154,6 @@
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
-                                <span class="cat-badge">Development</span>
                                 <span class="cat-badge">Platform</span>
                             </div>
                             <h3>Shared Integration Library</h3>
@@ -1163,13 +1162,13 @@
                         </div>
                     </article>
                     <!-- React Chrome Extension -->
-                    <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
+                    <article class="portfolio-item" data-category="tooling" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="automator.webp" alt="React Chrome Extension" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
-                                <span class="cat-badge">Development</span>
+                                <span class="cat-badge">Tooling</span>
                             </div>
                             <h3>React Chrome Extension</h3>
                             <p>Internal dev tool for real-time live testing of embedded experiences on client sites. Cut integration testing time by 70%.</p>
@@ -1177,42 +1176,27 @@
                         </div>
                     </article>
                     <!-- EmberJS Category Styling Feature -->
-                    <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
+                    <article class="portfolio-item" data-category="platform" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="ember.webp" alt="EmberJS Category Styling Feature" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
-                                <span class="cat-badge">Development</span>
+                                <span class="cat-badge">Platform</span>
                             </div>
                             <h3>EmberJS Category Styling Feature</h3>
                             <p>Internal platform feature that gave designers category-wide styling control across creative assets. Eliminated a 10-20 minute manual workaround.</p>
                             <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
                         </div>
                     </article>
-                    <!-- FlightTrack -->
-                    <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
-                        <div class="portfolio-thumb">
-                            <img src="flighttrack.webp" alt="FlightTrack real-time flight tracker plotting live aircraft on a map" loading="lazy" decoding="async">
-                        </div>
-                        <div class="portfolio-content">
-                            <div class="portfolio-cat">
-                                <span class="cat-badge">Development</span>
-                            </div>
-                            <h3>FlightTrack</h3>
-                            <p>Real-time flight tracker in React 19 and TypeScript. Plots live aircraft on a WebGL map and interpolates positions between polls so motion reads as continuous.</p>
-                            <span class="view-btn">View Details <span aria-hidden="true">→</span></span>
-                        </div>
-                    </article>
                     <!-- JS Integration Scripts -->
-                    <article class="portfolio-item" data-category="scripting" tabindex="0" role="button">
+                    <article class="portfolio-item" data-category="platform" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="js-inte.webp" alt="JS Integration Scripts" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
-                                <span class="cat-badge">Development</span>
-                                <span class="cat-badge">Scripting</span>
+                                <span class="cat-badge">Platform</span>
                             </div>
                             <h3>Platform Integration Scripts</h3>
                             <p>Defensive JavaScript integrations for embedding third-party scripts inside live client production pages. Built to run reliably in unpredictable environments we had no control over, under performance constraints we couldn’t negotiate.</p>
@@ -1220,14 +1204,14 @@
                         </div>
                     </article>
                     <!-- Automated Testing -->
-                    <article class="portfolio-item" data-category="qa" tabindex="0" role="button">
+                    <article class="portfolio-item" data-category="tooling" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="qa.webp" alt="Automated Testing Framework" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
-                                <span class="cat-badge">Development</span>
-                                <span class="cat-badge">QA</span>
+                                <span class="cat-badge">Tooling</span>
+                                <span class="cat-badge">Testing</span>
                             </div>
                             <h3>Automated Testing Framework</h3>
                             <p>Gherkin suite in Cucumber.js and Protractor over Selenium, run across BrowserStack from Jenkins, validating interactive media before it went into research sessions.</p>
@@ -1235,14 +1219,13 @@
                         </div>
                     </article>
                     <!-- Mobile Simulator -->
-                    <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
+                    <article class="portfolio-item" data-category="tooling" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="mobo-sim-800x800.webp" alt="Mobile Simulator" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
-                                <span class="cat-badge">Development</span>
-                                <span class="cat-badge">Scripting</span>
+                                <span class="cat-badge">Tooling</span>
                             </div>
                             <h3>Mobile Device Simulator</h3>
                             <p>Mobile and tablet simulator that ran live eye-tracking off the device&rsquo;s own camera, in any browser window, with no dedicated eye-tracker attached.</p>
@@ -1250,14 +1233,13 @@
                         </div>
                     </article>
                     <!-- Randomized Shelf Set -->
-                    <article class="portfolio-item" data-category="dev" tabindex="0" role="button">
+                    <article class="portfolio-item" data-category="interfaces" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="shelf-set-800x800.webp" alt="Randomized Image Shelf Set" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
-                                <span class="cat-badge">Development</span>
-                                <span class="cat-badge">Scripting</span>
+                                <span class="cat-badge">Interfaces</span>
                             </div>
                             <h3>Customizable Shelf Layout</h3>
                             <p>Randomized retail shelf layouts for product studies, so position did not ride along with the result.</p>
@@ -1265,14 +1247,13 @@
                         </div>
                     </article>
                     <!-- Moving Image Script -->
-                    <article class="portfolio-item" data-category="scripting" tabindex="0" role="button">
+                    <article class="portfolio-item" data-category="interfaces" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="movingshelf-800x800.webp" alt="Moving Image Script" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
-                                <span class="cat-badge">Development</span>
-                                <span class="cat-badge">Scripting</span>
+                                <span class="cat-badge">Interfaces</span>
                             </div>
                             <h3>Dynamic Image Animation</h3>
                             <p>Scroll- and interaction-driven motion for images inside study stimuli, with engagement recorded alongside the capture data.</p>
@@ -1280,14 +1261,13 @@
                         </div>
                     </article>
                     <!-- Password Overlay -->
-                    <article class="portfolio-item" data-category="scripting" tabindex="0" role="button">
+                    <article class="portfolio-item" data-category="interfaces" tabindex="0" role="button">
                         <div class="portfolio-thumb">
                             <img src="passoverlay-800x800.webp" alt="HTML Password Overlay" loading="lazy" decoding="async">
                         </div>
                         <div class="portfolio-content">
                             <div class="portfolio-cat">
-                                <span class="cat-badge">Development</span>
-                                <span class="cat-badge">Scripting</span>
+                                <span class="cat-badge">Interfaces</span>
                             </div>
                             <h3>HTML Overlay Password Lock</h3>
                             <p>Password gate for client assets that were not meant to be publicly reachable &mdash; and it had to sit over the page without breaking the capture running underneath.</p>
@@ -1423,63 +1403,56 @@
 
         const portfolioData = {
             'Shared Integration Library': {
-                categories: ['Development', 'Platform'],
+                categories: ['Platform'],
                 description: 'The curated set of reusable scripts and patterns every engineer on the team built against, covering the client-side problems that came up on every engagement.',
                 details: 'Engineers drew from it instead of solving the same problems independently on each engagement. I owned what went in, set the standards, and kept it current as new edge cases turned up \u2014 paired with the documentation and mentorship that cut new engineer ramp-up by 20%. The work it covered shipped continuously onto conversion-critical client sites under delivery SLAs, with no LCP or CLS regression across them. Worth being precise about what it was not: a curated set of scripts and patterns, not a packaged library. No versioned releases, no importable dependency, no automated test suite.'
             },
-            'FlightTrack': {
-                image: 'flighttrack.webp',
-                categories: ['Development'],
-                description: 'Real-time flight tracker that plots live aircraft on a WebGL map, built around a data source that updates far more slowly than the interface needs to.',
-                details: 'React 19, TypeScript, Vite and MapLibre GL JS. The OpenSky API polls on a 60 second cycle, so aircraft would sit frozen and then jump. Dead-reckoning interpolation runs at 10fps between polls using the spherical law of cosines, so motion reads as continuous, and an early poll fires when a projected position drifts too far from the last known waypoint. Defensive throughout: geolocation degrades from GPS to IP to a default, rate limits back off with a visible countdown, polling pauses via the Page Visibility API, and the map degrades gracefully when WebGL is unavailable. Tested with Vitest, React Testing Library and Playwright.',
-                link: 'https://github.com/brianeng00/flight-track'
-            },
             'React Chrome Extension': {
                 image: 'autom.mp4',
-                categories: ['Development'],
+                categories: ['Tooling'],
                 description: 'Internal dev tool that enabled real-time live testing of embedded experiences on client sites, built because teammates were blocked by slow manual integration testing.',
                 details: 'Built with React, TypeScript, and a custom Webpack multi-entry config to handle the Chrome extension build pipeline: popup, content script, and background service worker compiled as separate bundles. Uses the Chrome Extension API and CSS injection via DOM manipulation to inject and configure experiences live on any client site. Reduced integration testing time by 70%.',
                 link: 'https://github.com/brianeng00/top-bar-automator'
             },
             'EmberJS Category Styling Feature': {
                 image: 'ember.webp',
-                categories: ['Development'],
+                categories: ['Platform'],
                 description: 'Internal platform feature that gave designers category-wide styling control across creative assets, built from scratch with zero documentation to go on.',
                 details: 'Dug into the data models to understand how styling layers were structured, then built cascade logic that applied bulk updates without overwriting one-off customizations designers had already made. What previously took 10 to 20 minutes of repetitive work now takes seconds. 80% efficiency gain. Presented to the design lead and managers at completion.'
             },
             'Automated Testing Framework': {
                 image: 'qa.webp',
-                categories: ['Development', 'QA'],
+                categories: ['Tooling', 'Testing'],
                 description: 'Gherkin suite in Cucumber.js and Protractor over Selenium, run across BrowserStack from Jenkins, validating interactive media before it went into research sessions.',
                 details: 'What was under test was not a checkout flow. These were interactive ads and media assets going into eye-tracking and facial-coding sessions, so the thing that mattered was whether an interaction and the data it produced both survived the browser. A silent failure did not look like a bug. It looked like data. Gherkin specs in Cucumber.js driving Protractor over Selenium WebDriver, run across the BrowserStack device grid from Jenkins on AWS. The scenarios read as the behavior being validated rather than as scripts, and the browser matrix ran in CI instead of by hand.'
             },
             'Mobile Device Simulator': {
                 image: 'mobo-sim-800x800.webp',
-                categories: ['Development', 'Scripting'],
+                categories: ['Tooling'],
                 description: 'Mobile and tablet simulator that ran live eye-tracking off the device\u2019s own camera, in any browser window, with no dedicated eye-tracker attached.',
                 details: 'The platform normally needed dedicated eye-tracking hardware. This let a study run on a phone or tablet using the device\u2019s own camera, inside an ordinary browser window, with the simulator reproducing the target viewport and touch behavior around it. Built on the reusable AngularJS templates we had standardized for the platform, so one capture flow covered every form factor instead of being rebuilt per device.'
             },
             'HTML Overlay Password Lock': {
                 image: 'passoverlay-800x800.webp',
-                categories: ['Development', 'Scripting'],
+                categories: ['Interfaces'],
                 description: 'Password gate for client assets that were not meant to be publicly reachable, sitting over the page without breaking the capture running underneath.',
                 details: 'Clients sent assets that were not meant to be publicly reachable, so a session needed a lock in front of them. The gate was the easy part. The constraint was that everything behind it still had to work: the DOM stayed fully reachable and interaction capture kept running, which ruled out an iframe or a separate page. Plain JavaScript and jQuery layered over the live document.'
             },
             'Dynamic Image Animation': {
                 image: 'movingshelf-800x800.webp',
-                categories: ['Development', 'Scripting'],
+                categories: ['Interfaces'],
                 description: 'Scroll- and interaction-driven motion for images inside study stimuli, with engagement recorded alongside the capture data.',
                 details: 'CSS transforms where the browser could handle them, JavaScript where it could not. This was the jQuery era and the support matrix was wide. Moved and transitioned image elements in response to scroll and interaction, and recorded engagement with the animated content, so the motion was part of what the study measured rather than decoration on top of it.'
             },
             'Customizable Shelf Layout': {
                 image: 'shelf-set-800x800.webp',
-                categories: ['Development', 'Scripting'],
+                categories: ['Interfaces'],
                 description: 'Randomized retail shelf layouts for product studies, so position did not ride along with the result.',
                 details: 'A shelf set is a grid of products a participant looks at while being tracked. Show every participant the same arrangement and position is confounded with product. This built shelves from a configurable product set, randomized the arrangement per session, kept the layout responsive so one study ran across screen sizes, and recorded interaction against each position.'
             },
             'Platform Integration Scripts': {
                 image: 'js-inte.webp',
-                categories: ['Development', 'Scripting'],
+                categories: ['Platform'],
                 description: 'Defensive JavaScript integrations for embedding third-party scripts inside live client production pages. Built to run reliably in unpredictable environments we had no control over, under performance constraints we couldn’t negotiate.',
                 details: 'Studies ran inside third-party survey tools \u2014 SurveyGizmo, Qualtrics, ConfirmIt \u2014 so the capture layer had to live in someone else\u2019s page: conflicting scripts, CSP restrictions, and markup that could change between one study and the next with no notice. Cross-origin isolation, event delegation, and DOM access patterns that do not break the host. Data moved out through Python and Node REST integrations into Podio, Salesforce and Google Analytics.'
             }
